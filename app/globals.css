@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #020817;
+    color: #f8fafc;
+  }
+
+  ::selection {
+    background-color: #14b8a6;
+    color: #020817;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#020817] font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-teal-500/25 hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 border border-slate-700 hover:border-teal-500/60 text-slate-300 hover:text-teal-400 font-medium px-6 py-3 rounded-lg transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .card {
+    @apply bg-slate-900/60 border border-slate-800 rounded-xl p-6 transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:border-teal-500/40 hover:shadow-xl hover:shadow-teal-500/5 hover:-translate-y-1;
+  }
+
+  .section-label {
+    @apply text-teal-400 text-sm font-semibold uppercase tracking-widest;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-white;
+  }
+
+  .section-subtitle {
+    @apply text-slate-400 text-lg leading-relaxed;
+  }
+
+  .tech-pill {
+    @apply text-xs font-medium bg-teal-500/10 text-teal-400 border border-teal-500/20 px-3 py-1 rounded-full;
+  }
+
+  .skill-tag {
+    @apply text-sm bg-slate-800 text-slate-300 border border-slate-700 px-3 py-1.5 rounded-lg hover:border-teal-500/40 hover:text-teal-400 transition-colors;
+  }
+
+  .nav-link {
+    @apply text-slate-400 hover:text-white transition-colors text-sm font-medium relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-px after:bg-teal-400 after:transition-all hover:after:w-full;
+  }
+
+  .glow-teal {
+    box-shadow: 0 0 40px -10px rgba(20, 184, 166, 0.3);
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .font-display {
+    font-family: var(--font-syne), system-ui, sans-serif;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #020817;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #14b8a6;
+}
