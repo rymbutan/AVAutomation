@@ -26,7 +26,7 @@ export default function WorkCTA() {
           duration: 0.6,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top bottom',
+            start: 'top bottom+=350',
             once: true,
           },
         }
@@ -46,7 +46,7 @@ export default function WorkCTA() {
             ease: 'osmo',
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: 'top bottom',
+              start: 'top bottom+=350',
               once: true,
             },
           }
@@ -64,7 +64,7 @@ export default function WorkCTA() {
           ease: 'back.out(1.5)',
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top bottom',
+            start: 'top bottom+=350',
             once: true,
           },
         }
@@ -81,7 +81,7 @@ export default function WorkCTA() {
           delay: 0.2,
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: 'top bottom',
+            start: 'top bottom+=350',
             once: true,
           },
         }

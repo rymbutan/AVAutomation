@@ -15,7 +15,24 @@ export default function Footer() {
         { opacity: 0, y: 24 },
         {
           opacity: 1, y: 0, duration: 0.8, ease: 'osmo',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', once: true },
+          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom+=350', once: true },
+        }
+      )
+
+      // Letter-spacing drama on the large statement text
+      gsap.fromTo('.footer-statement-text',
+        { letterSpacing: '-0.5vw', opacity: 0 },
+        {
+          letterSpacing: '-0.05vw', opacity: 0.35, duration: 1.2, ease: 'osmo',
+          scrollTrigger: { trigger: '.footer-statement', start: 'top bottom+=350', once: true },
+        }
+      )
+
+      gsap.fromTo('.footer-bottom',
+        { opacity: 0, y: 16 },
+        {
+          opacity: 1, y: 0, duration: 0.6, ease: 'osmo',
+          scrollTrigger: { trigger: '.footer-bottom', start: 'top bottom+=300', once: true },
         }
       )
     }, sectionRef)

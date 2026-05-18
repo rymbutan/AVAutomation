@@ -79,6 +79,12 @@ export default function Hero() {
       <div className="hero-overlay-top"    aria-hidden="true" />
       <div className="hero-overlay-bottom" aria-hidden="true" />
 
+      {/* ── Scroll hint ── */}
+      <div className="hero-scroll-hint" aria-hidden="true">
+        <span className="hero-scroll-label">Scroll</span>
+        <div className="hero-scroll-line" />
+      </div>
+
       {/* ── Name row: "Ar/ym" left edge, "Ven/diola" right edge ── */}
       <div className="hero-name-row" aria-label="Arym Vendiola">
 

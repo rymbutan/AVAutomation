@@ -79,8 +79,16 @@ const CROPS: Record<string, { src: string; maxWidth?: string }> = {
 }
 
 export default function WorkPage() {
-  const [activeId, setActiveId] = useState(PROJECTS[0].id)
+  const [activeId,   setActiveId]   = useState(PROJECTS[0].id)
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
   const headerRef = useRef<HTMLHeadingElement>(null)
+
+  // Close lightbox on Escape
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightboxSrc(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   // ── Active dot: track which project is in view ─────────────────
   useEffect(() => {
@@ -152,6 +160,28 @@ export default function WorkPage() {
   }, [])
 
   return (
+    <>
+    {/* ── Lightbox ── */}
+    {lightboxSrc && (
+      <div
+        className="work-lightbox"
+        onClick={() => setLightboxSrc(null)}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Project image fullscreen"
+      >
+        <button className="work-lightbox-close" onClick={() => setLightboxSrc(null)} aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        <img
+          src={lightboxSrc}
+          alt="Project workflow fullscreen"
+          onClick={(e) => e.stopPropagation()}
+        />
+      </div>
+    )}
     <main className="work-page">
       {/* ── Page header ─────────────────────────────────────────── */}
       <header className="work-page-header" data-nav="grey">
@@ -273,12 +303,24 @@ export default function WorkPage() {
                 </div>
 
                 {/* ── Media ─────────────────────────────────────── */}
-                <div className="work-img-block work-img-block--cover" aria-label={`${project.title} workflow`}>
+                <div
+                  className="work-img-block work-img-block--cover work-img-clickable"
+                  aria-label={`${project.title} workflow — click to enlarge`}
+                  onClick={() => setLightboxSrc(crop.src)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && setLightboxSrc(crop.src)}
+                >
                   <img
                     src={crop.src}
                     alt={`${project.title} workflow screenshot`}
                     style={crop.maxWidth ? { maxWidth: crop.maxWidth, margin: '0 auto' } : undefined}
                   />
+                  <div className="work-img-expand-hint" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                    </svg>
+                  </div>
                 </div>
               </article>
             )
@@ -286,5 +328,6 @@ export default function WorkPage() {
         </div>
       </div>
     </main>
+    </>
   )
 }

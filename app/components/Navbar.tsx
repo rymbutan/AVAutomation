@@ -17,6 +17,17 @@ export default function Navbar() {
   const homeHref  = (anchor: string) => isWork ? `/${anchor}` : anchor
   const workHref  = '/work'
 
+  // Navbar blur — add .is-scrolled once user leaves hero
+  useEffect(() => {
+    const nav = navRef.current
+    if (!nav) return
+    const onScroll = () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 80)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   // Nav colour theme — IntersectionObserver on [data-nav] sections
   useEffect(() => {
     const nav = navRef.current
