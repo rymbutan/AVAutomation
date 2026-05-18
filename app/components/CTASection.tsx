@@ -47,26 +47,26 @@ export default function CTASection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Heading SplitText entrance
+      // Container entrance — fires 400px before section enters viewport
+      gsap.fromTo('.cta-container',
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1, y: 0, duration: 0.6, ease: 'osmo',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom+=400', once: true },
+        }
+      )
+
+      // Heading SplitText entrance — fires slightly after container fade
       if (headingRef.current) {
         const split = new SplitText(headingRef.current, { type: 'chars' })
         gsap.fromTo(split.chars,
           { yPercent: 110, opacity: 0 },
           {
-            yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.012, ease: 'osmo',
-            scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', once: true },
+            yPercent: 0, opacity: 1, duration: 0.6, stagger: 0.01, ease: 'osmo',
+            scrollTrigger: { trigger: sectionRef.current, start: 'top bottom+=350', once: true },
           }
         )
       }
-
-      // Container entrance
-      gsap.fromTo('.cta-container',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1, y: 0, duration: 0.8, ease: 'osmo',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', once: true },
-        }
-      )
 
       // Arrow hover: rotate ↗ on mouseenter, reset on mouseleave
       const arrow = document.querySelector('.cta-arrow-wrap')
@@ -119,7 +119,7 @@ export default function CTASection() {
         {/* Bottom row */}
         <div className="cta-bottom">
           {/* Arrow link */}
-          <a href={`mailto:${EMAIL}`} className="cta-arrow-wrap" aria-label="Send email">
+          <a href={`mailto:${EMAIL}`} className="cta-arrow-wrap" aria-label="Send email" data-magnetic="0.4">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M7 17L17 7" /><path d="M7 7h10v10" />

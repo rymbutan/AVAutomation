@@ -69,7 +69,7 @@ export default function Benefits() {
           { yPercent: 100 },
           {
             yPercent: 0, duration: 0.8, stagger: 0.015, ease: 'osmo',
-            scrollTrigger: { trigger: ref.current, start: 'top bottom', once: true },
+            scrollTrigger: { trigger: ref.current, start: 'top bottom+=350', once: true },
           }
         )
       })
@@ -79,7 +79,7 @@ export default function Benefits() {
         { opacity: 0, y: 16 },
         {
           opacity: 1, y: 0, duration: 0.6, ease: 'osmo',
-          scrollTrigger: { trigger: subRef.current, start: 'top bottom', once: true },
+          scrollTrigger: { trigger: subRef.current, start: 'top bottom+=350', once: true },
         }
       )
 
@@ -90,7 +90,7 @@ export default function Benefits() {
           { yPercent: 110, opacity: 0 },
           {
             yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.012, ease: 'osmo',
-            scrollTrigger: { trigger: partnerHeadRef.current, start: 'top bottom', once: true },
+            scrollTrigger: { trigger: partnerHeadRef.current, start: 'top bottom+=350', once: true },
           }
         )
       }
@@ -102,7 +102,7 @@ export default function Benefits() {
         if (!line || !check) return
 
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: line.closest('.benefit-item'), start: 'top bottom', once: true },
+          scrollTrigger: { trigger: line.closest('.benefit-item'), start: 'top bottom+=350', once: true },
         })
         tl.fromTo(line,  { width: '0%' }, { width: '100%', duration: 0.7, ease: 'osmo' })
         tl.fromTo(check, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.7)' }, '-=0.4')

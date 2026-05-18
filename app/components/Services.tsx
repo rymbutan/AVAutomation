@@ -296,7 +296,7 @@ export default function Services() {
           {
             yPercent: 0, opacity: 1,
             duration: 0.7, stagger: 0.015, ease: 'osmo',
-            scrollTrigger: { trigger: headingRef.current, start: 'top bottom', once: true },
+            scrollTrigger: { trigger: headingRef.current, start: 'top bottom+=350', once: true },
           }
         )
       }
@@ -310,7 +310,7 @@ export default function Services() {
             clipPath: 'inset(0% 0 0 0)',
             duration: 0.8, ease: 'osmo',
             delay: (i % 4) * 0.08,
-            scrollTrigger: { trigger: block.closest('.service-item'), start: 'top bottom', once: true },
+            scrollTrigger: { trigger: block.closest('.service-item'), start: 'top bottom+=350', once: true },
           }
         )
       })
@@ -321,7 +321,7 @@ export default function Services() {
           { opacity: 0, x: -24 },
           {
             opacity: 1, x: 0, duration: 0.6, ease: 'osmo',
-            scrollTrigger: { trigger: el, start: 'top bottom', once: true },
+            scrollTrigger: { trigger: el, start: 'top bottom+=350', once: true },
           }
         )
       })
@@ -339,7 +339,7 @@ export default function Services() {
             onUpdate: () => {
               ;(el as HTMLElement).textContent = String(Math.round(proxy.val)).padStart(2, '0')
             },
-            scrollTrigger: { trigger: el, start: 'top bottom', once: true },
+            scrollTrigger: { trigger: el, start: 'top bottom+=350', once: true },
           }
         )
       })
