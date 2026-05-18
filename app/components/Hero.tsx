@@ -1,144 +1,111 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
 
-const roles = [
-  'AI Automation Engineer',
-  'Technical Virtual Assistant',
-  'Workflow Architect',
-  'QA Specialist',
-]
-
-const floatingIcons = [
-  { icon: '⚡', top: '20%', left: '8%', delay: '0s' },
-  { icon: '🤖', top: '60%', left: '6%', delay: '1.5s' },
-  { icon: '🔗', top: '15%', right: '10%', delay: '0.8s' },
-  { icon: '📊', top: '70%', right: '8%', delay: '2s' },
-  { icon: '🛠️', top: '40%', left: '4%', delay: '1s' },
-  { icon: '✨', top: '50%', right: '5%', delay: '0.3s' },
-]
+gsap.registerPlugin(SplitText)
 
 export default function Hero() {
-  const [currentRole, setCurrentRole] = useState(0)
-  const [displayText, setDisplayText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
+  const sectionRef  = useRef<HTMLElement>(null)
+  const arRef       = useRef<HTMLSpanElement>(null)
+  const ymRef       = useRef<HTMLSpanElement>(null)
+  const venRef      = useRef<HTMLSpanElement>(null)
+  const diolaRef    = useRef<HTMLSpanElement>(null)
+  const subLeftRef  = useRef<HTMLParagraphElement>(null)
+  const subRightRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
-    const role = roles[currentRole]
-    let timeout: ReturnType<typeof setTimeout>
+    const ctx = gsap.context(() => {
+      const splitAr    = new SplitText(arRef.current!,    { type: 'chars' })
+      const splitYm    = new SplitText(ymRef.current!,    { type: 'chars' })
+      const splitVen   = new SplitText(venRef.current!,   { type: 'chars' })
+      const splitDiola = new SplitText(diolaRef.current!, { type: 'chars' })
 
-    if (!isDeleting && displayText === role) {
-      timeout = setTimeout(() => setIsDeleting(true), 2200)
-    } else if (isDeleting && displayText === '') {
-      setIsDeleting(false)
-      setCurrentRole((prev) => (prev + 1) % roles.length)
-    } else {
-      timeout = setTimeout(
-        () => {
-          setDisplayText((prev) =>
-            isDeleting ? prev.slice(0, -1) : role.slice(0, prev.length + 1)
-          )
-        },
-        isDeleting ? 40 : 90
+      const tl = gsap.timeline({ delay: 1.2, defaults: { ease: 'osmo' } })
+
+      tl.fromTo([...splitAr.chars, ...splitYm.chars],
+        { yPercent: 120, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.85, stagger: 0.03 }
       )
-    }
+      tl.fromTo([...splitVen.chars, ...splitDiola.chars],
+        { yPercent: 120, opacity: 0 },
+        { yPercent: 0, opacity: 1, duration: 0.85, stagger: 0.025 },
+        '-=0.65'
+      )
+      tl.fromTo([subLeftRef.current, subRightRef.current],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, stagger: 0.1 },
+        '-=0.3'
+      )
 
-    return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, currentRole])
+      // Subtle video parallax on mouse move
+      const section = sectionRef.current
+      if (!section) return
+      function onMove(e: MouseEvent) {
+        const nx = (e.clientX / window.innerWidth  - 0.5) * 2
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2
+        gsap.to('.hero-video', {
+          x: Math.max(-12, Math.min(12, nx * 12)),
+          y: Math.max(-8,  Math.min(8,  ny * 8)),
+          duration: 2, ease: 'power2.out',
+        })
+      }
+      section.addEventListener('mousemove', onMove)
+      return () => {
+        section.removeEventListener('mousemove', onMove)
+        splitAr.revert()
+        splitYm.revert()
+        splitVen.revert()
+        splitDiola.revert()
+      }
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background layers */}
-      <div className="absolute inset-0 bg-grid" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#020817]" />
+    <section
+      ref={sectionRef}
+      id="hero"
+      data-nav="peach"
+      className="hero-section"
+      aria-label="Hero"
+    >
+      {/* ── Full-coverage video ── */}
+      <video className="hero-video" autoPlay muted loop playsInline aria-hidden="true">
+        <source src="/me.mp4" type="video/mp4" />
+      </video>
+      <div className="hero-overlay-top"    aria-hidden="true" />
+      <div className="hero-overlay-bottom" aria-hidden="true" />
 
-      {/* Gradient orbs */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-teal-600/10 rounded-full blur-[120px] animate-pulse-slow" />
-      <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-600/8 rounded-full blur-[100px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-900/20 rounded-full blur-[120px]" />
+      {/* ── Name row: "Ar/ym" left edge, "Ven/diola" right edge ── */}
+      <div className="hero-name-row" aria-label="Arym Vendiola">
 
-      {/* Floating icons */}
-      {floatingIcons.map((item, i) => (
-        <div
-          key={i}
-          className="absolute hidden lg:flex items-center justify-center w-12 h-12 bg-slate-800/60 border border-slate-700/60 rounded-xl text-xl animate-float backdrop-blur-sm"
-          style={{
-            top: item.top,
-            left: item.left,
-            right: item.right,
-            animationDelay: item.delay,
-          }}
-        >
-          {item.icon}
-        </div>
-      ))}
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto py-24">
-        {/* Status badge */}
-        <div className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/30 rounded-full px-4 py-1.5 mb-10 animate-fade-in">
-          <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
-          <span className="text-teal-400 text-sm font-medium">
-            Open to Part-time Remote Opportunities
-          </span>
-        </div>
-
-        {/* Main headline */}
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold text-white mb-6 leading-[1.1] animate-slide-up">
-          I Build Systems That
-          <br />
-          <span className="gradient-text">Work While You Sleep.</span>
-        </h1>
-
-        {/* Typewriter role */}
-        <div className="h-10 flex items-center justify-center mb-6">
-          <p className="text-lg sm:text-xl text-slate-400">
-            I&apos;m Arym &mdash;{' '}
-            <span className="text-teal-400 font-semibold">
-              {displayText}
-              <span className="animate-blink">|</span>
-            </span>
+        <div className="hero-name-block">
+          <div className="hero-name-overflow">
+            <span ref={arRef} className="hero-name-word">Ar</span>
+          </div>
+          <div className="hero-name-overflow">
+            <span ref={ymRef} className="hero-name-word">ym</span>
+          </div>
+          <p ref={subLeftRef} className="hero-sub-label" style={{ opacity: 0 }}>
+            AI Automation Specialist&nbsp;<span>2026</span>
           </p>
         </div>
 
-        {/* Subheadline */}
-        <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in">
-          A Technical VA and IT professional who architects AI-powered automation workflows,
-          orchestrates CRM pipelines, and builds systems that eliminate manual bottlenecks
-          — so your team can focus on what actually matters.
-        </p>
-
-        {/* CTAs */}
-        <div className="flex flex-wrap gap-4 justify-center mb-16 animate-slide-up">
-          <a href="#projects" className="btn-primary">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-            View My Work
-          </a>
-          <a href="#contact" className="btn-secondary">
-            Let&apos;s Collaborate
-          </a>
+        <div className="hero-name-block hero-name-block--right">
+          <div className="hero-name-overflow">
+            <span ref={venRef} className="hero-name-word">Ven</span>
+          </div>
+          <div className="hero-name-overflow">
+            <span ref={diolaRef} className="hero-name-word">diola</span>
+          </div>
+          <p ref={subRightRef} className="hero-sub-label hero-sub-label--right" style={{ opacity: 0 }}>
+            Open to Part-time&nbsp;<span>[Remote]</span>
+          </p>
         </div>
 
-        {/* Tool badges */}
-        <div className="flex flex-wrap gap-2 justify-center animate-fade-in">
-          {['Zapier', 'AI Integration', 'HubSpot', 'GoHighLevel', 'Google Workspace', 'Asana', 'CRM Automation'].map(
-            (tool) => (
-              <span key={tool} className="tech-pill">
-                {tool}
-              </span>
-            )
-          )}
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600 animate-bounce">
-        <span className="text-xs">scroll</span>
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
       </div>
     </section>
   )

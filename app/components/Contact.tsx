@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ScrollReveal from './ScrollReveal'
 
 const contactInfo = [
   {
@@ -69,17 +70,19 @@ export default function Contact() {
     <section id="contact" className="py-24 px-4 sm:px-6 bg-slate-900/20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="section-label mb-3">Get In Touch</p>
-          <h2 className="section-title mb-4">
-            Ready to{' '}
-            <span className="gradient-text">Automate & Scale?</span>
-          </h2>
-          <p className="section-subtitle mx-auto max-w-xl">
-            Whether you need a Zapier workflow built, a CRM integrated, or a full-stack project
-            developed — let&apos;s talk about how I can help.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <p className="section-label mb-3">Get In Touch</p>
+            <h2 className="section-title mb-4">
+              Ready to{' '}
+              <span className="gradient-text">Automate & Scale?</span>
+            </h2>
+            <p className="section-subtitle mx-auto max-w-xl">
+              Whether you need a Zapier workflow built, a CRM integrated, or a full-stack project
+              developed — let&apos;s talk about how I can help.
+            </p>
+          </div>
+        </ScrollReveal>
 
         <div className="grid lg:grid-cols-5 gap-10">
           {/* Contact info */}

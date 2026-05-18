@@ -1,3 +1,5 @@
+import ScrollReveal from './ScrollReveal'
+
 const experiences = [
   {
     type: 'work',
@@ -49,16 +51,18 @@ export default function Experience() {
     <section id="experience" className="py-24 px-4 sm:px-6 bg-slate-900/20">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16">
-          <p className="section-label mb-3">Background</p>
-          <h2 className="section-title mb-4">
-            Experience &{' '}
-            <span className="gradient-text">Education</span>
-          </h2>
-          <p className="section-subtitle mx-auto max-w-xl">
-            Nearly 5 years of remote work across QA, client engagement, and technical automation.
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-16">
+            <p className="section-label mb-3">Background</p>
+            <h2 className="section-title mb-4">
+              Experience &{' '}
+              <span className="gradient-text">Education</span>
+            </h2>
+            <p className="section-subtitle mx-auto max-w-xl">
+              Nearly 5 years of remote work across QA, client engagement, and technical automation.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Timeline */}
         <div className="relative">
@@ -67,8 +71,8 @@ export default function Experience() {
 
           <div className="space-y-12">
             {experiences.map((exp, i) => (
+              <ScrollReveal key={exp.role} delay={i * 120}>
               <div
-                key={exp.role}
                 className={`relative flex flex-col md:flex-row gap-8 md:gap-12 ${
                   i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
@@ -121,6 +125,7 @@ export default function Experience() {
                   </div>
                 </div>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

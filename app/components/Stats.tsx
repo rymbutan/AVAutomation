@@ -1,3 +1,5 @@
+import ScrollReveal from './ScrollReveal'
+
 const stats = [
   {
     value: '5+',
@@ -46,17 +48,19 @@ export default function Stats() {
     <section className="py-12 border-y border-slate-800/60 bg-slate-900/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center group">
-              <div className="inline-flex items-center justify-center w-10 h-10 bg-teal-500/10 text-teal-400 rounded-lg mb-3 group-hover:bg-teal-500/20 transition-colors">
-                {stat.icon}
+          {stats.map((stat, i) => (
+            <ScrollReveal key={stat.label} delay={i * 100}>
+              <div className="text-center group">
+                <div className="inline-flex items-center justify-center w-10 h-10 bg-teal-500/10 text-teal-400 rounded-lg mb-3 group-hover:bg-teal-500/20 transition-colors">
+                  {stat.icon}
+                </div>
+                <div className="font-display text-3xl font-bold gradient-text mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-white font-semibold text-sm mb-1">{stat.label}</div>
+                <div className="text-slate-500 text-xs hidden sm:block leading-snug">{stat.description}</div>
               </div>
-              <div className="font-display text-3xl font-bold gradient-text mb-1">
-                {stat.value}
-              </div>
-              <div className="text-white font-semibold text-sm mb-1">{stat.label}</div>
-              <div className="text-slate-500 text-xs hidden sm:block leading-snug">{stat.description}</div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

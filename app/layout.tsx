@@ -1,36 +1,33 @@
 import type { Metadata } from 'next'
-import { Inter, Syne } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
+import SmoothScroll from './components/SmoothScroll'
+import Cursor from './components/Cursor'
 
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const syne = Syne({
-  subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['600', '700', '800'],
+  variable: '--font-jakarta',
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   title: 'Arym Vendiola | AI Automation & Technical VA',
   description:
-    'IT professional specializing in AI model integration, business process automation, and quality assurance. Building systems that work smarter.',
+    'Freelance AI Automation Specialist & Technical VA. I build systems that work while you sleep — from CRM automation to full-stack development.',
   keywords: [
     'AI Automation',
     'Technical VA',
-    'Zapier',
     'CRM Automation',
-    'Quality Assurance',
     'Workflow Optimization',
+    'Full-Stack Development',
+    'Zapier',
+    'n8n',
   ],
   openGraph: {
     title: 'Arym Vendiola | AI Automation & Technical VA',
     description:
-      'IT professional specializing in AI model integration and business process automation.',
+      'Freelance AI Automation Specialist & Technical VA. 5 years automating systems that never stop.',
     type: 'website',
   },
 }
@@ -41,11 +38,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${syne.variable} font-sans bg-[#020817] text-white antialiased`}
-      >
-        {children}
+    <html lang="en">
+      <body className={`${jakarta.variable} font-jakarta bg-cream text-grey antialiased`}>
+        <div className="top-glow" aria-hidden="true" />
+        <SmoothScroll>
+          <Cursor />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   )

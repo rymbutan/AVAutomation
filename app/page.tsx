@@ -1,24 +1,27 @@
 import Navbar from './components/Navbar'
+import IntroLoader from './components/IntroLoader'
 import Hero from './components/Hero'
-import Stats from './components/Stats'
-import About from './components/About'
-import Projects from './components/Projects'
-import Experience from './components/Experience'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
+import Marquee from './components/Marquee'
+import ScrollSection from './components/ScrollSection'
+import Services from './components/Services'
+import WorkCTA from './components/WorkCTA'
+import Benefits from './components/Benefits'
+import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 
 export default function Home() {
   return (
     <main>
+      <IntroLoader />
       <Navbar />
       <Hero />
-      <Stats />
-      <About />
-      <Projects />
-      <Experience />
-      <Skills />
-      <Contact />
+      <Marquee />
+      <ScrollSection />
+      <Marquee reverse />
+      <Services />
+      <WorkCTA />
+      <Benefits />
+      <CTASection />
       <Footer />
     </main>
   )
