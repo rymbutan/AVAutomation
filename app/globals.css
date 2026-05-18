@@ -1334,9 +1334,10 @@ html.dark ::selection {
 
   /* ─ Footer ─ */
   .footer-section       { padding: 8vw 5vw 4vw; min-height: auto; }
-  .footer-top           { flex-direction: column; gap: 2rem; }
-  .footer-stack         { text-align: left; }
-  .footer-bottom        { flex-direction: column; gap: 0.5rem; padding-top: 2rem; }
+  .footer-top           { flex-direction: row; justify-content: space-between; align-items: flex-start; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-links         { flex-direction: column; gap: 0.6rem; }
+  .footer-stack         { text-align: right; gap: 0.4rem; }
+  .footer-bottom        { flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 0.5rem; padding-top: 2rem; flex-wrap: wrap; }
   .footer-statement-text { font-size: clamp(1.6rem, 5vw, 5vw); }
 
   /* ─ Marquee ─ */
@@ -1352,14 +1353,10 @@ html.dark ::selection {
   .nav-logo             { font-size: 0.68rem; }
   .nav-social           { font-size: 0.68rem; }
 
-  /* Hero — stack names vertically on small phones */
-  .hero-name-row        { flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 0; }
-  .hero-name-block      { width: 100%; }
-  .hero-name-block--right { align-items: flex-start; text-align: left; }
-  .hero-name-block--right .hero-name-word { padding-left: 2.5vw; padding-right: 0; }
-  .hero-name-word       { font-size: clamp(3rem, 17vw, 17vw); letter-spacing: -0.6vw; }
-  .hero-sub-label       { font-size: 0.5rem; padding: 0.2rem 2.5vw 0.75rem; }
-  .hero-sub-label--right { text-align: left; padding-right: 0; padding-left: 2.5vw; }
+  /* Hero — keep left/right split, just scale the font */
+  .hero-name-word       { font-size: clamp(2.2rem, 15vw, 15vw); letter-spacing: -0.5vw; }
+  .hero-sub-label       { font-size: 0.48rem; padding: 0.2rem 2.5vw 0.75rem; }
+  .hero-sub-label--right { text-align: right; }
 
   /* Scroll section */
   .scroll-section-outer { height: 220vw; }
@@ -1409,7 +1406,7 @@ html.dark ::selection {
 
 /* ── 375px: standard iPhone ── */
 @media (max-width: 375px) {
-  .hero-name-word       { font-size: clamp(2.8rem, 16vw, 16vw); }
+  .hero-name-word       { font-size: clamp(2rem, 14vw, 14vw); letter-spacing: -0.4vw; }
   .scroll-section-text  { font-size: 12vw; }
   .services-heading     { font-size: 1.3rem; }
   .service-title        { font-size: 0.95rem; }
