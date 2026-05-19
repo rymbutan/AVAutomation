@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { CustomEase } from 'gsap/CustomEase'
 import { SplitText } from 'gsap/SplitText'
 
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText)
 
 // Register the "osmo" easing — exact copy of Juan Mora's custom ease
 CustomEase.create('osmo', '0.625, 0.05, 0, 1')
@@ -27,6 +28,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
+    // Always start at the top — disable browser scroll restoration
+    if (typeof window !== 'undefined') {
+      history.scrollRestoration = 'manual'
+      window.scrollTo(0, 0)
+    }
+
     // Initialize Lenis with lerp (not duration-based) — matches Juan Mora
     const lenis = new Lenis({
       lerp: 0.1,

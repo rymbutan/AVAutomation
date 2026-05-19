@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
+gsap.registerPlugin(ScrollTrigger, SplitText)
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'

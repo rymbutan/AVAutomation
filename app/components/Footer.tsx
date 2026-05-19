@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
 
 export default function Footer() {
@@ -10,34 +11,23 @@ export default function Footer() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Ensure footer content is visible even if scroll trigger misfires
-      gsap.set(['.footer-top', '.footer-bottom', '.footer-statement-text'], { opacity: 1 })
-
+      // y-only animations — opacity stays 1 at all times
       gsap.fromTo('.footer-top',
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1, y: 0, duration: 0.8, ease: 'osmo',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 95%', once: true },
-        }
+        { y: 20 },
+        { y: 0, duration: 0.8, ease: 'osmo',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 95%', once: true } }
       )
-
       gsap.fromTo('.footer-statement-text',
-        { letterSpacing: '-0.5vw', opacity: 0 },
-        {
-          letterSpacing: '-0.05vw', opacity: 0.35, duration: 1.2, ease: 'osmo',
-          scrollTrigger: { trigger: '.footer-statement', start: 'top 95%', once: true },
-        }
+        { letterSpacing: '-0.5vw' },
+        { letterSpacing: '-0.05vw', duration: 1.2, ease: 'osmo',
+          scrollTrigger: { trigger: '.footer-statement', start: 'top 95%', once: true } }
       )
-
       gsap.fromTo('.footer-bottom',
-        { opacity: 0, y: 16 },
-        {
-          opacity: 1, y: 0, duration: 0.6, ease: 'osmo',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top 90%', once: true },
-        }
+        { y: 12 },
+        { y: 0, duration: 0.6, ease: 'osmo',
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 90%', once: true } }
       )
     }, sectionRef)
-
     return () => ctx.revert()
   }, [])
 
@@ -55,7 +45,7 @@ export default function Footer() {
       <div className="footer-top">
         <nav className="footer-links" aria-label="Footer links">
           <a href="mailto:arymsrv@gmail.com" className="footer-link">Email</a>
-          <a href="https://linkedin.com/in/arym-vendiola" className="footer-link"
+          <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="footer-link"
             target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://wa.me/639910126516" className="footer-link"
             target="_blank" rel="noopener noreferrer">WhatsApp</a>
