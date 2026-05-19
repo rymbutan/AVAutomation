@@ -98,6 +98,14 @@ export default function CTASection() {
   }
 
   return (
+    <>
+    {/* Toast notification */}
+    <div className={`copy-toast${copied ? ' copy-toast--visible' : ''}`} role="status" aria-live="polite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M5 13l4 4L19 7"/>
+      </svg>
+      Email copied to clipboard
+    </div>
     <section
       ref={sectionRef}
       id="cta"
@@ -152,5 +160,6 @@ export default function CTASection() {
         </div>
       </div>
     </section>
+    </>
   )
 }

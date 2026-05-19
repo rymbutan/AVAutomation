@@ -37,6 +37,8 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     })
 
     lenisRef.current = lenis
+    // Expose globally so any component can pause/resume
+    ;(window as Window & { __lenis?: Lenis }).__lenis = lenis
 
     // Connect Lenis to GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
