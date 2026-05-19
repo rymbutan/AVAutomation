@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import Link from 'next/link'
+import Navbar from '../components/Navbar'
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
@@ -173,6 +174,7 @@ export default function WorkPage() {
 
   return (
     <>
+    <Navbar />
     {/* ── Lightbox ── */}
     {lightboxSrc && (
       <div
