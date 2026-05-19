@@ -45,7 +45,7 @@ export default function Footer() {
       <div className="footer-top">
         <nav className="footer-links" aria-label="Footer links">
           <a href="mailto:arymsrv@gmail.com" className="footer-link">Email</a>
-          <a href="https://linkedin.com/in/arym-vendiola" className="footer-link"
+          <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="footer-link"
             target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://wa.me/639910126516" className="footer-link"
             target="_blank" rel="noopener noreferrer">WhatsApp</a>

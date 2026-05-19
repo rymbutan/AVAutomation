@@ -134,7 +134,7 @@ export default function Navbar() {
         {/* Right — social links + mobile hamburger */}
         <div className="nav-right">
           <a href="mailto:arymsrv@gmail.com" className="nav-social" aria-label="Email">Email</a>
-          <a href="https://linkedin.com/in/arym-vendiola" className="nav-social"
+          <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="nav-social"
             target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
           <ThemeToggle />
 
@@ -158,7 +158,7 @@ export default function Navbar() {
           <a href={homeHref('#services')} className="mobile-menu-link" onClick={handleLink}>About</a>
           <Link href="/work"    className="mobile-menu-link" onClick={handleLink}>Work</Link>
           <a href="mailto:arymsrv@gmail.com" className="mobile-menu-link" onClick={handleLink}>Email</a>
-          <a href="https://linkedin.com/in/arym-vendiola" className="mobile-menu-link"
+          <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="mobile-menu-link"
             target="_blank" rel="noopener noreferrer" onClick={handleLink}>LinkedIn</a>
         </nav>
       </div>
