@@ -741,15 +741,15 @@ html.dark ::selection {
 
 .work-big {
   font-family: var(--font-jakarta);
-  font-size: 38vw;
+  font-size: clamp(4rem, 30vw, 30vw);
   font-weight: 800;
   color: var(--color-peach);
-  letter-spacing: -1vw;
+  letter-spacing: -0.8vw;
   line-height: 0.85;
+  white-space: nowrap;
   position: relative;
-  overflow: hidden;
   display: block;
-  margin: -2vw 0 -4vw;
+  margin: -1vw 0 -3vw;
 }
 
 .folder-wrap {
@@ -1227,7 +1227,7 @@ html.dark ::selection {
   .services-heading         { font-size: clamp(1.8rem, 4.5vw, 4.5rem); }
   .service-item             { grid-template-columns: 38% 62%; gap: 2rem; }
   .service-images           { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
-  .work-big                 { font-size: 46vw; }
+  .work-big                 { font-size: clamp(3.5rem, 34vw, 34vw); white-space: nowrap; }
   .folder-wrap              { width: 10vw; height: 7vw; }
   .benefits-big-left,
   .benefits-big-right       { font-size: 7.5vw; }
@@ -1272,7 +1272,7 @@ html.dark ::selection {
 
   /* ─ Work CTA ─ */
   .work-cta-section     { padding: 14vw 5vw; }
-  .work-big             { font-size: 54vw; }
+  .work-big             { font-size: clamp(3rem, 42vw, 42vw); white-space: nowrap; }
   .folder-wrap          { width: 18vw; height: 13vw; }
 
   /* ─ Benefits ─ */
@@ -1336,7 +1336,7 @@ html.dark ::selection {
 
   /* Work CTA */
   .work-cta-section     { padding: 16vw 4vw; }
-  .work-big             { font-size: 64vw; }
+  .work-big             { font-size: clamp(2.5rem, 48vw, 48vw); white-space: nowrap; }
   .folder-wrap          { width: 22vw; height: 16vw; }
 
   /* Benefits */
@@ -1371,7 +1371,7 @@ html.dark ::selection {
   .scroll-section-text  { font-size: 12vw; }
   .services-heading     { font-size: 1.3rem; }
   .service-title        { font-size: 0.95rem; }
-  .work-big             { font-size: 68vw; }
+  .work-big             { font-size: clamp(2.5rem, 52vw, 52vw); white-space: nowrap; }
   .benefits-big-left,
   .benefits-big-right   { font-size: clamp(2rem, 15vw, 15vw); }
   .benefits-partner-heading { font-size: 12vw; }
