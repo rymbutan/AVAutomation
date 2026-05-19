@@ -1,38 +1,127 @@
 'use client'
 
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
-const serviceGradients = [
-  [
-    'linear-gradient(135deg, #ffbc95 0%, #f99e76 100%)',
-    'linear-gradient(135deg, #e8e9ef 0%, #d8d9e5 100%)',
-    'linear-gradient(135deg, #faf6ef 0%, #f0e8d8 100%)',
-    'linear-gradient(135deg, #f4f4f4 0%, #e0e0e0 100%)',
+// ── Images per service ────────────────────────────────────────
+const SERVICE_IMAGES: Record<string, { src: string; alt: string; pos?: string }[]> = {
+  '01': [
+    { src: '/project-01.png', alt: 'Asana CRM multi-path automation workflow', pos: 'center 20%' },
+    { src: '/project-02.png', alt: 'Lead enrichment and AI scoring pipeline',  pos: 'center top' },
+    { src: '/project-03.png', alt: 'AI content repurposing automation',         pos: 'center top' },
   ],
-  [
-    'linear-gradient(135deg, #2e54fe20 0%, #2e54fe40 100%)',
-    'linear-gradient(135deg, #ffbc95 0%, #ffe0cc 100%)',
-    'linear-gradient(135deg, #e8e9ef 0%, #c8c9cf 100%)',
-    'linear-gradient(135deg, #f99e76 0%, #f4d0b8 100%)',
+  '02': [
+    { src: '/project-01.png', alt: 'Asana CRM pipeline stages',     pos: 'center 50%' },
+    { src: '/project-02.png', alt: 'Lead scoring and routing flow',  pos: 'center 40%' },
   ],
-  [
-    'linear-gradient(135deg, #f4f4f4 0%, #e8e8e8 100%)',
-    'linear-gradient(135deg, #ffbc95 0%, #f99e76 100%)',
-    'linear-gradient(135deg, #e8e9ef 0%, #d4d5dd 100%)',
-    'linear-gradient(135deg, #faf6ef 0%, #f5e8d0 100%)',
+  '03': [
+    { src: '/project-03.png', alt: 'Content distribution automation', pos: 'center 30%' },
+    { src: '/project-04.png', alt: 'Xero financial reporting sync',   pos: 'center center' },
   ],
-  [
-    'linear-gradient(135deg, #2e54fe15 0%, #2e54fe30 100%)',
-    'linear-gradient(135deg, #f99e76 0%, #ffbc95 100%)',
-    'linear-gradient(135deg, #e8e9ef 0%, #dde0f0 100%)',
-    'linear-gradient(135deg, #f4f4f4 0%, #e5e5e5 100%)',
+  '04': [
+    { src: '/project-04.png', alt: 'Make.com workflow automation',     pos: 'center center' },
+    { src: '/project-05.png', alt: 'Gmail attachment sorting system',  pos: 'center center' },
   ],
-]
+}
+
+// ── Carousel sub-component ────────────────────────────────────
+function ServiceCarousel({ serviceNum }: { serviceNum: string }) {
+  const images  = SERVICE_IMAGES[serviceNum] ?? []
+  const [idx, setIdx]         = useState(0)
+  const [fading, setFading]   = useState(false)
+  const timerRef              = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const touchStartX           = useRef(0)
+
+  const goTo = useCallback((next: number) => {
+    if (fading || next === idx) return
+    setFading(true)
+    setTimeout(() => {
+      setIdx(next)
+      setFading(false)
+    }, 280)
+  }, [fading, idx])
+
+  // Auto-advance
+  useEffect(() => {
+    if (images.length <= 1) return
+    timerRef.current = setTimeout(() => goTo((idx + 1) % images.length), 3800)
+    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+  }, [idx, images.length, goTo])
+
+  // Touch swipe
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd   = (e: React.TouchEvent) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(delta) > 40) goTo(delta > 0
+      ? (idx + 1) % images.length
+      : (idx - 1 + images.length) % images.length
+    )
+  }
+
+  if (!images.length) return null
+  const img = images[idx]
+
+  return (
+    <div
+      className="svc-carousel"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      aria-label={`Service ${serviceNum} screenshot carousel`}
+    >
+      <div className={`svc-carousel-slide${fading ? ' svc-carousel-slide--fading' : ''}`}>
+        <img
+          src={img.src}
+          alt={img.alt}
+          style={{ objectPosition: img.pos ?? 'center center' }}
+        />
+      </div>
+
+      {/* Dots */}
+      {images.length > 1 && (
+        <div className="svc-carousel-dots" role="tablist" aria-label="Slide indicators">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              role="tab"
+              aria-selected={i === idx}
+              aria-label={`Slide ${i + 1}`}
+              className={`svc-carousel-dot${i === idx ? ' svc-carousel-dot--active' : ''}`}
+              onClick={() => goTo(i)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Prev / Next arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            className="svc-carousel-arrow svc-carousel-arrow--prev"
+            aria-label="Previous slide"
+            onClick={() => goTo((idx - 1 + images.length) % images.length)}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button
+            className="svc-carousel-arrow svc-carousel-arrow--next"
+            aria-label="Next slide"
+            onClick={() => goTo((idx + 1) % images.length)}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </>
+      )}
+    </div>
+  )
+}
 
 // ── Tool logo SVGs ───────────────────────────────────────────
 function ZapierLogo() {
@@ -301,16 +390,14 @@ export default function Services() {
         )
       }
 
-      // Image blocks: clip-path reveal per row
-      const blocks = document.querySelectorAll('.service-img-block')
-      blocks.forEach((block, i) => {
-        gsap.fromTo(block,
-          { clipPath: 'inset(100% 0 0 0)' },
+      // Carousel reveal: clip-path wipe per carousel
+      document.querySelectorAll('.svc-carousel').forEach((el) => {
+        gsap.fromTo(el,
+          { clipPath: 'inset(100% 0 0 0)', opacity: 0 },
           {
-            clipPath: 'inset(0% 0 0 0)',
-            duration: 0.8, ease: 'osmo',
-            delay: (i % 4) * 0.08,
-            scrollTrigger: { trigger: block.closest('.service-item'), start: 'top bottom+=350', once: true },
+            clipPath: 'inset(0% 0 0 0)', opacity: 1,
+            duration: 0.9, ease: 'osmo',
+            scrollTrigger: { trigger: el.closest('.service-item'), start: 'top bottom+=350', once: true },
           }
         )
       })
@@ -402,11 +489,10 @@ export default function Services() {
               </div>
             </div>
 
-            {/* Right: 3D-tilt image blocks */}
+            {/* Right: 3D-tilt carousel */}
             <div
               ref={(el) => { imgRowRefs.current[si] = el }}
               className="service-images"
-              aria-hidden="true"
               onMouseMove={(e) => {
                 if (imgRowRefs.current[si])
                   applyTilt(imgRowRefs.current[si]!, e)
@@ -416,11 +502,7 @@ export default function Services() {
                   resetTilt(imgRowRefs.current[si]!)
               }}
             >
-              {serviceGradients[si].map((grad, gi) => (
-                <div key={gi} className="service-img-block">
-                  <div className="service-img-inner" style={{ background: grad }} />
-                </div>
-              ))}
+              <ServiceCarousel serviceNum={service.num} />
             </div>
           </div>
         ))}
