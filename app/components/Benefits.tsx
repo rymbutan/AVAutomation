@@ -50,7 +50,9 @@ const benefitItems = [
 
 export default function Benefits() {
   const sectionRef       = useRef<HTMLElement>(null)
-  const bigLeftRef       = useRef<HTMLSpanElement>(null)
+  const bigGoodRef       = useRef<HTMLSpanElement>(null)
+  const bigAutoRef       = useRef<HTMLSpanElement>(null)
+  const bigLeftRef       = useRef<HTMLSpanElement>(null) // kept for overflow wrapper
   const bigRightRef      = useRef<HTMLSpanElement>(null)
   const subRef           = useRef<HTMLParagraphElement>(null)
   const partnerHeadRef   = useRef<HTMLHeadingElement>(null)
@@ -61,18 +63,32 @@ export default function Benefits() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Big peach text — SplitText chars from below
-      ;[bigLeftRef, bigRightRef].forEach((ref) => {
-        if (!ref.current) return
-        const split = new SplitText(ref.current, { type: 'chars' })
+      // "Good" — SplitText chars
+      if (bigGoodRef.current) {
+        const split = new SplitText(bigGoodRef.current, { type: 'chars' })
         gsap.fromTo(split.chars,
           { yPercent: 100 },
-          {
-            yPercent: 0, duration: 0.8, stagger: 0.015, ease: 'osmo',
-            scrollTrigger: { trigger: ref.current, start: 'top bottom+=350', once: true },
-          }
+          { yPercent: 0, duration: 0.8, stagger: 0.015, ease: 'osmo',
+            scrollTrigger: { trigger: bigGoodRef.current, start: 'top bottom+=350', once: true } }
         )
-      })
+      }
+      // "Automation" — animate as a whole word to preserve gradient
+      if (bigAutoRef.current) {
+        gsap.fromTo(bigAutoRef.current,
+          { yPercent: 100 },
+          { yPercent: 0, duration: 0.8, ease: 'osmo',
+            scrollTrigger: { trigger: bigAutoRef.current, start: 'top bottom+=350', once: true } }
+        )
+      }
+      // "takes time"
+      if (bigRightRef.current) {
+        const split = new SplitText(bigRightRef.current, { type: 'chars' })
+        gsap.fromTo(split.chars,
+          { yPercent: 100 },
+          { yPercent: 0, duration: 0.8, stagger: 0.015, ease: 'osmo',
+            scrollTrigger: { trigger: bigRightRef.current, start: 'top bottom+=350', once: true } }
+        )
+      }
 
       // Sub line
       gsap.fromTo(subRef.current,
@@ -123,7 +139,9 @@ export default function Benefits() {
       {/* 14vw big text — two separate full-width rows */}
       <div className="benefits-big-line benefits-big-line--left" aria-hidden="true">
         <div className="section-heading-overflow">
-          <span ref={bigLeftRef} className="benefits-big-left">Good <span className="benefits-accent">Automation</span></span>
+          <span className="benefits-big-left">
+            <span ref={bigGoodRef}>Good </span><span ref={bigAutoRef} className="benefits-accent">Automation</span>
+          </span>
         </div>
       </div>
       <div className="benefits-big-line benefits-big-line--right" aria-hidden="true">
