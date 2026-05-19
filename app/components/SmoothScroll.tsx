@@ -7,6 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { CustomEase } from 'gsap/CustomEase'
 import { SplitText } from 'gsap/SplitText'
 
+gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText)
 
 // Register the "osmo" easing — exact copy of Juan Mora's custom ease
 CustomEase.create('osmo', '0.625, 0.05, 0, 1')
