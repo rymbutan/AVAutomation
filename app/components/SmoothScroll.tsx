@@ -28,6 +28,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
+    // Always start at the top — disable browser scroll restoration
+    if (typeof window !== 'undefined') {
+      history.scrollRestoration = 'manual'
+      window.scrollTo(0, 0)
+    }
+
     // Initialize Lenis with lerp (not duration-based) — matches Juan Mora
     const lenis = new Lenis({
       lerp: 0.1,
