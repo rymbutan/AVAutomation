@@ -23,9 +23,9 @@ export default function IntroLoader() {
 
     tl.to(loader, {
       yPercent: -100,
-      duration: 1.1,
+      duration: 0.8,
       ease: 'osmo',
-      delay: 0.9,
+      delay: 0.4,
     })
 
     return () => {

@@ -5,7 +5,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Link from 'next/link'
 
-gsap.registerPlugin(ScrollTrigger)
 
 const FEATURED = [
   {
@@ -66,7 +65,7 @@ export default function FeaturedWork() {
         {FEATURED.map((p) => (
           <article key={p.num} className="featured-card" aria-label={p.title}>
             <div className="featured-img-wrap">
-              <img src={p.img} alt={`${p.title} workflow screenshot`} />
+              <img src={p.img} alt={`${p.title} workflow screenshot`} loading="lazy" decoding="async" />
             </div>
             <div className="featured-info">
               <div className="featured-meta">

@@ -4,27 +4,28 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
 
 export default function Footer() {
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Ensure footer content is visible even if scroll trigger misfires
+      gsap.set(['.footer-top', '.footer-bottom', '.footer-statement-text'], { opacity: 1 })
+
       gsap.fromTo('.footer-top',
         { opacity: 0, y: 24 },
         {
           opacity: 1, y: 0, duration: 0.8, ease: 'osmo',
-          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom+=350', once: true },
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 95%', once: true },
         }
       )
 
-      // Letter-spacing drama on the large statement text
       gsap.fromTo('.footer-statement-text',
         { letterSpacing: '-0.5vw', opacity: 0 },
         {
           letterSpacing: '-0.05vw', opacity: 0.35, duration: 1.2, ease: 'osmo',
-          scrollTrigger: { trigger: '.footer-statement', start: 'top bottom+=350', once: true },
+          scrollTrigger: { trigger: '.footer-statement', start: 'top 95%', once: true },
         }
       )
 
@@ -32,7 +33,7 @@ export default function Footer() {
         { opacity: 0, y: 16 },
         {
           opacity: 1, y: 0, duration: 0.6, ease: 'osmo',
-          scrollTrigger: { trigger: '.footer-bottom', start: 'top bottom+=300', once: true },
+          scrollTrigger: { trigger: sectionRef.current, start: 'top 90%', once: true },
         }
       )
     }, sectionRef)
