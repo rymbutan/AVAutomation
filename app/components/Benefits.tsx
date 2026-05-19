@@ -123,7 +123,7 @@ export default function Benefits() {
       {/* 14vw big text — two separate full-width rows */}
       <div className="benefits-big-line benefits-big-line--left" aria-hidden="true">
         <div className="section-heading-overflow">
-          <span ref={bigLeftRef} className="benefits-big-left">Good Automation</span>
+          <span ref={bigLeftRef} className="benefits-big-left">Good <span className="benefits-accent">Automation</span></span>
         </div>
       </div>
       <div className="benefits-big-line benefits-big-line--right" aria-hidden="true">

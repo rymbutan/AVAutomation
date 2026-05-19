@@ -83,6 +83,18 @@ export default function WorkPage() {
   const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
   const headerRef = useRef<HTMLHeadingElement>(null)
 
+  // Pause / resume Lenis when lightbox opens/closes
+  useEffect(() => {
+    const lenis = (window as Window & { __lenis?: { stop: () => void; start: () => void } }).__lenis
+    if (lightboxSrc) {
+      lenis?.stop()
+      document.body.style.overflow = 'hidden'
+    } else {
+      lenis?.start()
+      document.body.style.overflow = ''
+    }
+  }, [lightboxSrc])
+
   // Close lightbox on Escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setLightboxSrc(null) }
