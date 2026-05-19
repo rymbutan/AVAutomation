@@ -5,7 +5,6 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
 
 // ── Images per service ────────────────────────────────────────
 const SERVICE_IMAGES: Record<string, { src: string; alt: string; pos?: string }[]> = {
@@ -76,6 +75,8 @@ function ServiceCarousel({ serviceNum }: { serviceNum: string }) {
         <img
           src={img.src}
           alt={img.alt}
+          loading="lazy"
+          decoding="async"
           style={{ objectPosition: img.pos ?? 'center center' }}
         />
       </div>

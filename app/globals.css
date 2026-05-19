@@ -2794,4 +2794,3 @@ html.dark .ba-toggle-pill { background: var(--color-bg-warm); }
   .service-images { width: 100%; }
   .svc-carousel   { aspect-ratio: 16 / 9; border-radius: 10px; }
   .svc-carousel-arrow { opacity: 1; width: 28px; height: 28px; }
-}

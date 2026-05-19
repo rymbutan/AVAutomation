@@ -6,8 +6,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
-gsap.registerPlugin(ScrollTrigger, SplitText)
 
 // ─────────────────────────────────────────────────────────────────
 //  PROJECTS  —  fill in each field when ready
@@ -327,7 +327,7 @@ export default function WorkPage() {
                 >
                   <img
                     src={crop.src}
-                    alt={`${project.title} workflow screenshot`}
+                    alt={`${project.title} workflow screenshot`} loading="lazy" decoding="async"
                     style={crop.maxWidth ? { maxWidth: crop.maxWidth, margin: '0 auto' } : undefined}
                   />
                   <div className="work-img-expand-hint" aria-hidden="true">
@@ -342,6 +342,7 @@ export default function WorkPage() {
         </div>
       </div>
     </main>
+    <Footer />
     </>
   )
 }

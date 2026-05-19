@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 
-gsap.registerPlugin(SplitText)
 
 export default function Hero() {
   const sectionRef  = useRef<HTMLElement>(null)
@@ -22,7 +21,7 @@ export default function Hero() {
       const splitVen   = new SplitText(venRef.current!,   { type: 'chars' })
       const splitDiola = new SplitText(diolaRef.current!, { type: 'chars' })
 
-      const tl = gsap.timeline({ delay: 1.2, defaults: { ease: 'osmo' } })
+      const tl = gsap.timeline({ delay: 0.6, defaults: { ease: 'osmo' } })
 
       tl.fromTo([...splitAr.chars, ...splitYm.chars],
         { yPercent: 120, opacity: 0 },
@@ -73,7 +72,7 @@ export default function Hero() {
       aria-label="Hero"
     >
       {/* ── Full-coverage video ── */}
-      <video className="hero-video" autoPlay muted loop playsInline aria-hidden="true">
+      <video className="hero-video" autoPlay muted loop playsInline aria-hidden="true" preload="auto">
         <source src="/me.mp4" type="video/mp4" />
       </video>
       <div className="hero-overlay-top"    aria-hidden="true" />

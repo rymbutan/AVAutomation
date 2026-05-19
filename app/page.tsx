@@ -1,15 +1,18 @@
+import dynamic from 'next/dynamic'
 import Navbar from './components/Navbar'
 import IntroLoader from './components/IntroLoader'
 import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import ScrollSection from './components/ScrollSection'
-import Services from './components/Services'
-import FeaturedWork from './components/FeaturedWork'
-import BeforeAfter from './components/BeforeAfter'
-import WorkCTA from './components/WorkCTA'
-import Benefits from './components/Benefits'
-import CTASection from './components/CTASection'
-import Footer from './components/Footer'
+
+// Lazy-load everything below the fold — splits the JS bundle
+const Marquee       = dynamic(() => import('./components/Marquee'))
+const ScrollSection = dynamic(() => import('./components/ScrollSection'))
+const Services      = dynamic(() => import('./components/Services'))
+const FeaturedWork  = dynamic(() => import('./components/FeaturedWork'))
+const BeforeAfter   = dynamic(() => import('./components/BeforeAfter'))
+const WorkCTA       = dynamic(() => import('./components/WorkCTA'))
+const Benefits      = dynamic(() => import('./components/Benefits'))
+const CTASection    = dynamic(() => import('./components/CTASection'))
+const Footer        = dynamic(() => import('./components/Footer'))
 
 export default function Home() {
   return (
