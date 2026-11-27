@@ -91,7 +91,7 @@ export default function Navbar() {
 
         {/* Center — desktop nav links */}
         <nav className="nav-center" aria-label="Primary">
-          <a href={homeHref('#services')} className="nav-link">About</a>
+          <a href={homeHref('#about')} className="nav-link">About</a>
           {/*
             ── LOGO MARK ──────────────────────────────────────────────
             Replace the SVG below with your own logo, Lottie animation,
@@ -133,7 +133,7 @@ export default function Navbar() {
 
         {/* Right — social links + mobile hamburger */}
         <div className="nav-right">
-          <a href="mailto:arymsrv@gmail.com" className="nav-social" aria-label="Email">Email</a>
+          <a href="mailto:arymsrv@gmail.com?subject=Project%20inquiry" className="nav-social" aria-label="Email">Email</a>
           <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="nav-social"
             target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
           <ThemeToggle />
@@ -155,9 +155,9 @@ export default function Navbar() {
       <div ref={menuRef} className="mobile-menu" aria-hidden={!open} style={{ display: 'none' }}>
         <nav className="mobile-menu-nav" aria-label="Mobile navigation">
           <Link href="/"        className="mobile-menu-link" onClick={handleLink}>Home</Link>
-          <a href={homeHref('#services')} className="mobile-menu-link" onClick={handleLink}>About</a>
+          <a href={homeHref('#about')} className="mobile-menu-link" onClick={handleLink}>About</a>
           <Link href="/work"    className="mobile-menu-link" onClick={handleLink}>Work</Link>
-          <a href="mailto:arymsrv@gmail.com" className="mobile-menu-link" onClick={handleLink}>Email</a>
+          <a href="mailto:arymsrv@gmail.com?subject=Project%20inquiry" className="mobile-menu-link" onClick={handleLink}>Email</a>
           <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="mobile-menu-link"
             target="_blank" rel="noopener noreferrer" onClick={handleLink}>LinkedIn</a>
         </nav>

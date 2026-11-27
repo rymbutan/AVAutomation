@@ -21,9 +21,9 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Arym Vendiola | AI Automation Specialist',
+  title: 'Arym Vendiola | Freelance AI Automation Specialist',
   description:
-    'Freelance AI Automation Specialist & Technical VA. I build systems that work while you sleep — from CRM automation to full-stack development.',
+    'Freelance AI automation specialist. I build Zapier, Make and CRM workflows that take repetitive work off founders and small teams.',
   keywords: ['AI Automation', 'Technical VA', 'CRM Automation', 'Zapier', 'Make.com', 'n8n'],
   manifest: '/manifest.json',
   appleWebApp: {
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
     title: 'Arym Vendiola',
   },
   openGraph: {
-    title: 'Arym Vendiola | AI Automation Specialist',
-    description: 'Freelance AI Automation Specialist & Technical VA. Systems that work while you sleep.',
+    title: 'Arym Vendiola | Freelance AI Automation Specialist',
+    description: 'I build Zapier, Make and CRM workflows that take repetitive work off your plate.',
     type: 'website',
   },
 }

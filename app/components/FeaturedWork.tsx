@@ -12,6 +12,7 @@ const FEATURED = [
     num: '01',
     title: 'Asana CRM Pipeline & Lead Engagement',
     desc: 'Multi-path workflow that dynamically generates client folders, triggers timed follow-up sequences, and deploys AI-personalized recommendations upon deal closure.',
+    result: 'Client folders, follow-ups and proposals now happen automatically as a deal moves through Asana.',
     tools: ['Zapier', 'Asana', 'AI by Zapier', 'Gmail'],
     img: '/project-01.png',
     year: '2025',
@@ -20,6 +21,7 @@ const FEATURED = [
     num: '02',
     title: 'Real-Time Lead Enrichment & AI Scoring',
     desc: 'Automated pipeline that intercepts raw leads via webhooks, enriches profiles using Apollo API, routes by company size, and generates personalized outreach drafts.',
+    result: 'Raw leads reach sales already enriched, scored and routed, with a draft email ready to send.',
     tools: ['Zapier', 'Apollo API', 'Google Sheets', 'AI by Zapier'],
     img: '/project-02.png',
     year: '2025',
@@ -75,6 +77,7 @@ export default function FeaturedWork() {
               </div>
               <h3 className="featured-title">{p.title}</h3>
               <p className="featured-desc">{p.desc}</p>
+              <p className="featured-result">Result: {p.result}</p>
               <div className="featured-tools">
                 {p.tools.map((t) => (
                   <span key={t} className="featured-tool-tag">{t}</span>

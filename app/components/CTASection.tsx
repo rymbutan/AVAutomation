@@ -121,13 +121,13 @@ export default function CTASection() {
               Let&apos;s build something that works while you sleep
             </h2>
           </div>
-          <p className="cta-tagline">from early-stage startups to growing businesses.</p>
+          <p className="cta-tagline">Tell me what you want off your plate and I&apos;ll reply with next steps.</p>
         </div>
 
         {/* Bottom row */}
         <div className="cta-bottom">
           {/* Arrow link */}
-          <a href={`mailto:${EMAIL}`} className="cta-arrow-wrap" aria-label="Send email" data-magnetic="0.4">
+          <a href={`mailto:${EMAIL}?subject=Project%20inquiry`} className="cta-arrow-wrap" aria-label="Send email" data-magnetic="0.4">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M7 17L17 7" /><path d="M7 7h10v10" />

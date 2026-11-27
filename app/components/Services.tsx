@@ -22,10 +22,7 @@ const SERVICE_IMAGES: Record<string, { src: string; alt: string; pos?: string }[
     { src: '/project-03.png', alt: 'Content distribution automation', pos: 'center 30%' },
     { src: '/project-04.png', alt: 'Xero financial reporting sync',   pos: 'center center' },
   ],
-  '04': [
-    { src: '/project-04.png', alt: 'Make.com workflow automation',     pos: 'center center' },
-    { src: '/project-05.png', alt: 'Gmail attachment sorting system',  pos: 'center center' },
-  ],
+  // '04' (Full-Stack) intentionally has no images until dev project screenshots exist
 }
 
 // ── Carousel sub-component ────────────────────────────────────
@@ -326,26 +323,30 @@ const TOOL_LOGOS: Record<string, React.ReactNode> = {
 const services = [
   {
     num: '01',
-    title: 'AI Automation Workflows',
-    desc: 'Build intelligent multi-step automations using Zapier, Make.com, and custom AI pipelines that eliminate repetitive tasks and scale operations.',
+    kicker: 'AI Automation Workflows',
+    title: 'Repetitive work that runs without you',
+    desc: 'Lead intake, follow-ups, reporting and content publishing turned into reliable Zapier, Make and n8n workflows, with AI added only where it earns its place.',
     tags: ['Zapier', 'Make.com', 'n8n', 'GoHighLevel'],
   },
   {
     num: '02',
-    title: 'CRM & Lead Systems',
-    desc: 'Design and implement CRM pipelines in HubSpot and GoHighLevel with automated lead routing, nurture sequences, and reporting dashboards.',
+    kicker: 'CRM & Lead Systems',
+    title: 'Leads that never fall through the cracks',
+    desc: 'HubSpot and GoHighLevel pipelines with automated routing, scoring and follow-up sequences, so every lead is handled quickly and nothing is lost in a handoff.',
     tags: ['HubSpot', 'GoHighLevel', 'Airtable', 'Mailchimp'],
   },
   {
     num: '03',
-    title: 'Technical Virtual Assistant',
-    desc: 'Provide high-leverage technical support across project management, data ops, content coordination, and cross-functional communication.',
+    kicker: 'Technical Virtual Assistant',
+    title: 'A technical right hand',
+    desc: 'Project management, data ops and tool setup handled by someone who can also fix the automation behind it. Documented, async-friendly and easy to hand off.',
     tags: ['Notion', 'Asana', 'Google Workspace', 'Slack'],
   },
   {
     num: '04',
-    title: 'Full-Stack Development',
-    desc: 'Develop custom web applications and internal tools with Next.js, React, Supabase, and TypeScript — from MVP to production.',
+    kicker: 'Full-Stack Development',
+    title: 'Custom tools when no-code runs out',
+    desc: 'Web apps and internal tools in Next.js, React, Supabase and TypeScript, built when an off-the-shelf tool or a Zap is not enough.',
     tags: ['Next.js', 'React', 'TypeScript', 'Supabase'],
   },
 ]
@@ -455,21 +456,28 @@ export default function Services() {
     >
       <div className="section-heading-overflow">
         <h2 ref={headingRef} className="services-heading">
-          I help companies succeed with:
+          What I can take off your plate
         </h2>
       </div>
 
       <div className="services-list" role="list">
         {services.map((service, si) => (
-          <div key={service.num} className="service-item" role="listitem">
+          <div
+            key={service.num}
+            className={`service-item${SERVICE_IMAGES[service.num] ? '' : ' service-item--text'}`}
+            role="listitem"
+          >
             {/* Left: text */}
             <div className="service-left">
-              <span
-                className="service-num"
-                data-num={parseInt(service.num)}
-              >
-                {service.num}
-              </span>
+              <div className="service-label-row">
+                <span
+                  className="service-num"
+                  data-num={parseInt(service.num)}
+                >
+                  {service.num}
+                </span>
+                <span className="service-kicker">{service.kicker}</span>
+              </div>
               <h3
                 className="service-title"
                 onMouseEnter={(e) => handleTitleHover(e.currentTarget)}
@@ -491,21 +499,23 @@ export default function Services() {
               </div>
             </div>
 
-            {/* Right: 3D-tilt carousel */}
-            <div
-              ref={(el) => { imgRowRefs.current[si] = el }}
-              className="service-images"
-              onMouseMove={(e) => {
-                if (imgRowRefs.current[si])
-                  applyTilt(imgRowRefs.current[si]!, e)
-              }}
-              onMouseLeave={() => {
-                if (imgRowRefs.current[si])
-                  resetTilt(imgRowRefs.current[si]!)
-              }}
-            >
-              <ServiceCarousel serviceNum={service.num} />
-            </div>
+            {/* Right: 3D-tilt carousel (skipped when a service has no images) */}
+            {SERVICE_IMAGES[service.num] && (
+              <div
+                ref={(el) => { imgRowRefs.current[si] = el }}
+                className="service-images"
+                onMouseMove={(e) => {
+                  if (imgRowRefs.current[si])
+                    applyTilt(imgRowRefs.current[si]!, e)
+                }}
+                onMouseLeave={() => {
+                  if (imgRowRefs.current[si])
+                    resetTilt(imgRowRefs.current[si]!)
+                }}
+              >
+                <ServiceCarousel serviceNum={service.num} />
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -44,7 +44,7 @@ export default function Footer() {
       {/* Top row */}
       <div className="footer-top">
         <nav className="footer-links" aria-label="Footer links">
-          <a href="mailto:arymsrv@gmail.com" className="footer-link">Email</a>
+          <a href="mailto:arymsrv@gmail.com?subject=Project%20inquiry" className="footer-link">Email</a>
           <a href="https://www.linkedin.com/in/asrvautomatesworkflows/" className="footer-link"
             target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <a href="https://wa.me/639910126516" className="footer-link"
@@ -66,8 +66,8 @@ export default function Footer() {
 
       {/* Bottom row */}
       <div className="footer-bottom">
-        <span className="footer-copy">AI Automation Specialist 2026</span>
-        <span className="footer-remote">Open to Remote Work [Worldwide]</span>
+        <span className="footer-copy">Freelance AI Automation Specialist {new Date().getFullYear()}</span>
+        <span className="footer-remote">Taking freelance projects [Remote, worldwide]</span>
       </div>
     </footer>
   )

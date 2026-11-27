@@ -86,7 +86,8 @@ export default function Hero() {
       </div>
 
       {/* ── Name row: "Ar/ym" left edge, "Ven/diola" right edge ── */}
-      <div className="hero-name-row" aria-label="Arym Vendiola">
+      <h1 className="sr-only">Arym Vendiola, freelance AI automation specialist</h1>
+      <div className="hero-name-row" aria-hidden="true">
 
         <div className="hero-name-block">
           <div className="hero-name-overflow">
@@ -96,7 +97,7 @@ export default function Hero() {
             <span ref={ymRef} className="hero-name-word">ym</span>
           </div>
           <p ref={subLeftRef} className="hero-sub-label" style={{ opacity: 0 }}>
-            AI Automation Specialist&nbsp;<span>2026</span>
+            Freelance AI Automation&nbsp;<span>{new Date().getFullYear()}</span>
           </p>
         </div>
 
@@ -108,7 +109,7 @@ export default function Hero() {
             <span ref={diolaRef} className="hero-name-word">diola</span>
           </div>
           <p ref={subRightRef} className="hero-sub-label hero-sub-label--right" style={{ opacity: 0 }}>
-            Open to Part-time&nbsp;<span>[Remote]</span>
+            Taking new projects&nbsp;<span>[Remote]</span>
           </p>
         </div>
 
