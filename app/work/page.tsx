@@ -129,7 +129,7 @@ export default function WorkPage() {
         gsap.fromTo(
           split.chars,
           { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 0.8, stagger: 0.025, ease: 'osmo', delay: 1.2 }
+          { yPercent: 0, opacity: 1, duration: 0.8, stagger: 0.025, ease: 'osmo', delay: 0.2 }
         )
       }
 

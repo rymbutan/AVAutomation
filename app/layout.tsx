@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Plus_Jakarta_Sans, Fraunces } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from './components/SmoothScroll'
-import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import PageTransition from './components/PageTransition'
 
@@ -10,6 +9,13 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-jakarta',
   weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+})
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  axes: ['opsz', 'SOFT'],
   display: 'swap',
 })
 
@@ -21,9 +27,9 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'Arym Vendiola | AI Automation Specialist',
+  title: 'Arym Vendiola | Freelance AI Automation Specialist',
   description:
-    'Freelance AI Automation Specialist & Technical VA. I build systems that work while you sleep — from CRM automation to full-stack development.',
+    'Freelance AI automation specialist. I build Zapier, Make and CRM workflows that take repetitive work off founders and small teams.',
   keywords: ['AI Automation', 'Technical VA', 'CRM Automation', 'Zapier', 'Make.com', 'n8n'],
   manifest: '/manifest.json',
   appleWebApp: {
@@ -32,8 +38,8 @@ export const metadata: Metadata = {
     title: 'Arym Vendiola',
   },
   openGraph: {
-    title: 'Arym Vendiola | AI Automation Specialist',
-    description: 'Freelance AI Automation Specialist & Technical VA. Systems that work while you sleep.',
+    title: 'Arym Vendiola | Freelance AI Automation Specialist',
+    description: 'I build Zapier, Make and CRM workflows that take repetitive work off your plate.',
     type: 'website',
   },
 }
@@ -44,12 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
-      <body className={`${jakarta.variable} font-jakarta bg-cream text-grey antialiased`}>
+      <body className={`${jakarta.variable} ${fraunces.variable} font-jakarta bg-cream text-grey antialiased`}>
         <ScrollProgress />
         <PageTransition />
         <div className="top-glow" aria-hidden="true" />
         <SmoothScroll>
-          <Cursor />
           {children}
         </SmoothScroll>
         <script

@@ -42,10 +42,10 @@ function useScramble(original: string) {
 }
 
 const benefitItems = [
-  'Clear communication — async-first, no surprises',
-  'Shipped on time, documented for handoff',
-  'Automation thinking built into every solution',
-  'Remote-native, globally available',
+  'Async-first updates, so you always know where things stand',
+  'Built in your own accounts and documented, so you own it',
+  'Tested against real edge cases before it goes live',
+  'Overlap with US, UK and Australian working hours',
 ]
 
 export default function Benefits() {
@@ -59,7 +59,7 @@ export default function Benefits() {
   const checkRefs        = useRef<(HTMLDivElement | null)[]>([])
   const lineRefs         = useRef<(HTMLDivElement | null)[]>([])
 
-  const { text: partnerText, trigger: scramblePartner } = useScramble('perspective + sharp instincts')
+  const { text: partnerText, trigger: scramblePartner } = useScramble('clear updates + reliable builds')
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -159,8 +159,8 @@ export default function Benefits() {
       <div className="benefits-desc-row">
         <p className="benefits-desc">
           From building zero-to-one automation systems to optimizing existing CRM pipelines,
-          I partner with growth-stage teams to design reliable, scalable workflows that replace
-          manual effort with intelligent automation — delivered on time, fully documented.
+          I work with founders and small teams to design reliable workflows that replace
+          manual effort with automation, fully documented so your team can run them.
         </p>
         <div className="benefits-desc-tags">
           <span className="benefits-desc-tag">Zapier · Make.com</span>
@@ -172,7 +172,7 @@ export default function Benefits() {
 
       {/* Partner heading — scrambles on hover */}
       <div className="benefits-partner-row">
-        <span className="benefits-partner-label">Companies partner with me because of my</span>
+        <span className="benefits-partner-label">Working with me means</span>
         <div className="section-heading-overflow">
           <h2
             ref={partnerHeadRef}

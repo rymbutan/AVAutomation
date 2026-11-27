@@ -8,23 +8,23 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 
 
 const BEFORE = [
-  { icon: '📧', num: '01', label: 'Lead fills out form' },
-  { icon: '⏳', num: '02', label: 'Wait for manual review' },
-  { icon: '🔍', num: '03', label: 'Manually research company' },
-  { icon: '📝', num: '04', label: 'Copy data into spreadsheet' },
-  { icon: '✉️', num: '05', label: 'Write personalised email' },
-  { icon: '📤', num: '06', label: 'Send email manually' },
-  { icon: '🗓️', num: '07', label: 'Hope to remember follow-up' },
+  { num: '01', label: 'Lead fills out form' },
+  { num: '02', label: 'Wait for manual review' },
+  { num: '03', label: 'Manually research company' },
+  { num: '04', label: 'Copy data into spreadsheet' },
+  { num: '05', label: 'Write personalised email' },
+  { num: '06', label: 'Send email manually' },
+  { num: '07', label: 'Hope to remember follow-up' },
 ]
 
 const AFTER = [
-  { icon: '📧', num: '01', label: 'Lead fills out form',           auto: false },
-  { icon: '⚡', num: '02', label: 'Webhook triggers instantly',    auto: true  },
-  { icon: '🤖', num: '03', label: 'Apollo enriches profile',       auto: true  },
-  { icon: '📊', num: '04', label: 'Scored & routed by AI',         auto: true  },
-  { icon: '✨', num: '05', label: 'Personalised email drafted',    auto: true  },
-  { icon: '📤', num: '06', label: 'Sent + logged automatically',   auto: true  },
-  { icon: '🔁', num: '07', label: 'Follow-up sequence starts',     auto: true  },
+  { num: '01', label: 'Lead fills out form',           auto: false },
+  { num: '02', label: 'Webhook triggers instantly',    auto: true  },
+  { num: '03', label: 'Apollo enriches profile',       auto: true  },
+  { num: '04', label: 'Scored & routed by AI',         auto: true  },
+  { num: '05', label: 'Personalised email drafted',    auto: true  },
+  { num: '06', label: 'Sent + logged automatically',   auto: true  },
+  { num: '07', label: 'Follow-up sequence starts',     auto: true  },
 ]
 
 export default function BeforeAfter() {
@@ -134,7 +134,7 @@ export default function BeforeAfter() {
     if (line)    gsap.to(line, { scaleY: 1, duration: 0.9, ease: 'power3.out', delay: 0.1 })
   }, [active, animating])
 
-  const steps = (active === 'before' ? BEFORE : AFTER) as { icon: string; num: string; label: string; auto?: boolean }[]
+  const steps = (active === 'before' ? BEFORE : AFTER) as { num: string; label: string; auto?: boolean }[]
 
   return (
     <section
@@ -194,7 +194,6 @@ export default function BeforeAfter() {
                 <span className={`ba-step-num${active === 'after' && 'auto' in step && step.auto ? ' ba-step-num--auto' : ''}`} aria-hidden="true">
                   {step.num}
                 </span>
-                <span className="ba-step-icon" aria-hidden="true">{step.icon}</span>
                 <span className="ba-step-label">{step.label}</span>
                 {'auto' in step && step.auto && (
                   <span className="ba-step-auto-badge" aria-hidden="true">auto</span>
