@@ -22,7 +22,7 @@ export default function Hero() {
       const splitVen   = new SplitText(venRef.current!,   { type: 'chars' })
       const splitDiola = new SplitText(diolaRef.current!, { type: 'chars' })
 
-      const tl = gsap.timeline({ delay: 0.6, defaults: { ease: 'osmo' } })
+      const tl = gsap.timeline({ delay: 0.15, defaults: { ease: 'osmo' } })
 
       tl.fromTo([...splitAr.chars, ...splitYm.chars],
         { yPercent: 120, opacity: 0 },

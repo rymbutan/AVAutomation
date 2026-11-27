@@ -1,5 +1,4 @@
 import Navbar from './components/Navbar'
-import IntroLoader from './components/IntroLoader'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import ScrollSection from './components/ScrollSection'
@@ -16,7 +15,6 @@ import Footer from './components/Footer'
 export default function Home() {
   return (
     <main>
-      <IntroLoader />
       <Navbar />
       <Hero />
       <Marquee />

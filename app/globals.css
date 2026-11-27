@@ -7,7 +7,7 @@ img, video, svg { max-width: 100%; height: auto; display: block; }
 video { width: 100%; }
 
 /* ─────────────────────────────────────────
-   CSS CUSTOM PROPERTIES  (Juan Mora palette)
+   CSS CUSTOM PROPERTIES
 ───────────────────────────────────────── */
 :root {
   --color-bg-warm:   #faf6ef;
@@ -15,8 +15,8 @@ video { width: 100%; }
   --color-peach:     #ffbc95;
   --color-peach-2:   #f99e76;
   --color-blue:      #2e54fe;
-  --color-grey:      #96908c;
-  --color-dark-grey: #706b67;
+  --color-grey:      #6b6560;   /* body text, 5:1 on cream */
+  --color-dark-grey: #3b3632;   /* headings */
   --color-cold:      #e8e9ef;
 
   --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -100,8 +100,8 @@ body {
   font-family: var(--font-jakarta);
   background-color: var(--color-bg-warm);
   color: var(--color-grey);
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -144,11 +144,7 @@ html.dark ::selection {
 /* ─────────────────────────────────────────
    CUSTOM CURSOR (hide native on desktop)
 ───────────────────────────────────────── */
-@media (min-width: 1024px) {
-  *, *::before, *::after {
-    cursor: none !important;
-  }
-}
+/* native cursor restored — custom cursor removed */
 
 /* ─────────────────────────────────────────
    TOP GLOW (fixed overlay)
@@ -161,7 +157,7 @@ html.dark ::selection {
   height: 100%;
   pointer-events: none;
   z-index: 900;
-  box-shadow: inset 0 2px 30px #ffb286c4, inset 0 2px 130px 8px #ff72437d;
+  box-shadow: inset 0 0 40px rgba(255,178,134,0.28), inset 0 0 140px rgba(255,114,67,0.10);
 }
 
 /* ─────────────────────────────────────────
@@ -708,9 +704,9 @@ html.dark ::selection {
 
 .service-desc {
   font-family: var(--font-jakarta);
-  font-size: 0.82rem;
+  font-size: 1rem;
   color: var(--color-grey);
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .service-images {
@@ -2878,3 +2874,72 @@ html.dark .ba-toggle-pill { background: var(--color-bg-warm); }
 
 html.dark .process-step,
 html.dark .about-fact { border-color: var(--color-cold); }
+
+
+/* ─────────────────────────────────────────
+   VISUAL REFRESH
+   Warm serif for display type, Jakarta stays for UI/body.
+───────────────────────────────────────── */
+.hero-name-word,
+.scroll-section-text,
+.services-heading,
+.service-title,
+.featured-title,
+.ba-heading,
+.work-big,
+.benefits-big-left,
+.benefits-big-right,
+.benefits-partner-heading,
+.benefit-line,
+.cta-heading,
+.cta-lets-talk,
+.footer-statement-text,
+.process-heading,
+.process-title,
+.about-heading,
+.about-fact-value,
+.work-header-title,
+.work-project-title,
+.intro-loader-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variation-settings: 'SOFT' 100;
+}
+
+body { --font-display: var(--font-fraunces), Georgia, serif; }
+
+/* Marquee is text-only now */
+.marquee-item { gap: 0.75rem; }
+
+/* ── Reduced motion: stop ambient animation ── */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+  .scroll-shapes-wrap, .ba-blob, .hero-video { transform: none !important; }
+  .hero-video { display: none; }
+  *, *::before, *::after { scroll-behavior: auto !important; }
+}
+
+/* Descender fix: overflow-hidden reveal wrappers were clipping y/g/p
+   (e.g. "ym" read as "vm"). Pad the wrapper, pull the layout back. */
+.hero-name-overflow { padding-bottom: 1.6vw; margin-bottom: -0.4vw; }
+.section-heading-overflow { padding-bottom: max(6px, 1.4vw); margin-bottom: max(-6px, -1.4vw); }
+
+/* Readable accent: deeper peach on cream for the big display lines */
+.benefits-big-left, .benefits-big-right { color: #e0713a; }
+.benefits-accent {
+  background: linear-gradient(90deg, #e0713a 0%, #d9602a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+html.dark .benefits-big-left, html.dark .benefits-big-right { color: var(--color-peach); }
+html.dark .benefits-accent {
+  background: linear-gradient(90deg, var(--color-peach) 0%, var(--color-peach-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Small peach text failed contrast on cream; use a deeper accent for text */
+:root { --color-accent-text: #b4501d; }
+html.dark { --color-accent-text: var(--color-peach); }
+.service-tag { color: var(--color-accent-text); font-size: 0.75rem; }
+.featured-eyebrow, .ba-eyebrow, .service-num, .process-num { color: var(--color-accent-text); }

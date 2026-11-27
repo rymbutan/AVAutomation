@@ -9,7 +9,7 @@ import { SplitText } from 'gsap/SplitText'
 
 gsap.registerPlugin(ScrollTrigger, CustomEase, SplitText)
 
-// Register the "osmo" easing — exact copy of Juan Mora's custom ease
+// Register the "osmo" easing
 CustomEase.create('osmo', '0.625, 0.05, 0, 1')
 
 // Set global GSAP defaults
@@ -34,7 +34,10 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       window.scrollTo(0, 0)
     }
 
-    // Initialize Lenis with lerp (not duration-based) — matches Juan Mora
+    // Initialize Lenis with lerp (not duration-based)
+    // Respect reduced-motion: use native scrolling
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
     const lenis = new Lenis({
       lerp: 0.1,
       smoothWheel: true,

@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Plus_Jakarta_Sans, Fraunces } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from './components/SmoothScroll'
-import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import PageTransition from './components/PageTransition'
 
@@ -10,6 +9,13 @@ const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
   variable: '--font-jakarta',
   weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+})
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  axes: ['opsz', 'SOFT'],
   display: 'swap',
 })
 
@@ -44,12 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
-      <body className={`${jakarta.variable} font-jakarta bg-cream text-grey antialiased`}>
+      <body className={`${jakarta.variable} ${fraunces.variable} font-jakarta bg-cream text-grey antialiased`}>
         <ScrollProgress />
         <PageTransition />
         <div className="top-glow" aria-hidden="true" />
         <SmoothScroll>
-          <Cursor />
           {children}
         </SmoothScroll>
         <script

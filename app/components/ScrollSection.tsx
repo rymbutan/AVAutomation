@@ -48,7 +48,7 @@ export default function ScrollSection() {
       gsap.to(squareRef.current, { y: '14vw', rotation: -20, scrollTrigger: trigger })
 
       // ── Word-by-word colour scroll ──────────────────────────
-      // Colour each word from grey → peach as that word enters
+      // Colour each word from soft grey → deep peach (readable on cream) as that word enters
       // the active scroll window (spread across 70% of scroll distance)
       const total = WORDS.length
       ScrollTrigger.create({
@@ -63,7 +63,10 @@ export default function ScrollSection() {
             if (!el) return
             // word i is fully lit when progress reaches (i+1)/total * 0.72
             const wordProgress = Math.max(0, Math.min(1, (p - i * window) / window))
-            el.style.color = lerpColor('#96908c', '#ffbc95', wordProgress)
+            const dark = document.documentElement.classList.contains('dark')
+            el.style.color = dark
+              ? lerpColor('#4a453f', '#ffbc95', wordProgress)
+              : lerpColor('#d6d0ca', '#d9602a', wordProgress)
           })
         },
       })
